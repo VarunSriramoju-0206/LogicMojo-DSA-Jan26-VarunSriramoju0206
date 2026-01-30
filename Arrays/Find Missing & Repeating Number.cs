@@ -85,3 +85,66 @@ class Solution
 
 
 //Using index approach pending
+class Result
+{
+
+    /*
+     * Complete the 'find_missing' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts INTEGER_ARRAY arr as parameter.
+     */
+
+    public static List<int> find_missing(List<int> arr)
+    {
+        
+        int n = arr.Count();
+        
+        //Using Index mapping technique
+        int[] result = new int[n+1];
+        
+        for(int i=0; i<n; i++){
+            result[arr[i]]++;
+        }
+        
+        int a = 0, b =0;
+        
+        //Console.WriteLine(string.Join(",", result));
+        
+        for(int i=0; i<n+1; i++){
+            
+            if(result[i] == 2){
+                a = i;
+            }
+            if(result[i] == 0){
+                b = i;
+            }
+            
+        }
+        
+        return new int[] {a, b}.ToList();
+        
+        
+        
+    }
+
+}
+
+class Solution
+{
+    public static void Main(string[] args)
+    {
+        TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
+
+        List<int> result = Result.find_missing(arr);
+
+        textWriter.WriteLine(String.Join(" ", result));
+
+        textWriter.Flush();
+        textWriter.Close();
+    }
+}
